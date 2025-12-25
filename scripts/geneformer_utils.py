@@ -516,7 +516,8 @@ def plot_3d_spatial(
             x=1.02,
             y=0.5,
             xanchor='left',
-            yanchor='middle'
+            yanchor='middle',
+            itemdoubleclick=False  # Disable double-click isolation behavior
         ),
         # Adjust figure size for document embedding
         height=500,
@@ -527,7 +528,14 @@ def plot_3d_spatial(
     fig.for_each_trace(lambda t: t.update(marker=dict(size=point_size, line=dict(width=0))))
     
     if save_path:
-        fig.write_html(save_path)
+        # Add config to prevent interaction issues
+        config = {
+            'displayModeBar': True,
+            'displaylogo': False,
+            'doubleClick': 'reset',  # Double-click to reset view
+            'scrollZoom': True
+        }
+        fig.write_html(save_path, config=config)
         print(f"✅ Plot saved to: {save_path}")
     
     return fig
@@ -588,12 +596,12 @@ def plot_perturbation_impact_3d(
         color='Impact',
         color_continuous_scale='Reds',
         range_color=[vmin, vmax],
-        opacity=0.7,  # 修改：降低透明度
+        opacity=0.7,  
         title=f"{gene_name} Deletion Impact",
         hover_data=hover_data
     )
     
-    # 修改：更新marker大小
+    # Update marker size
     fig.update_traces(marker=dict(size=point_size))
     
     fig.update_layout(
@@ -601,11 +609,21 @@ def plot_perturbation_impact_3d(
             xaxis=dict(visible=False),
             yaxis=dict(visible=False),
             zaxis=dict(visible=False)
+        ),
+        legend=dict(
+            itemdoubleclick=False  # Disable double-click isolation behavior
         )
     )
     
     if save_path:
-        fig.write_html(save_path)
+        # Add config to prevent interaction issues
+        config = {
+            'displayModeBar': True,
+            'displaylogo': False,
+            'doubleClick': 'reset',  # Double-click to reset view
+            'scrollZoom': True
+        }
+        fig.write_html(save_path, config=config)
         print(f"✅ Plot saved to: {save_path}")
     
     return fig
@@ -773,7 +791,8 @@ def plot_perturbation_comparison_3d(
             yanchor='top',
             bgcolor='rgba(255, 255, 255, 0.85)',
             bordercolor='rgba(0,0,0,0.2)',
-            borderwidth=1
+            borderwidth=1,
+            itemdoubleclick=False  # Disable double-click isolation behavior
         )
     )
     
@@ -788,9 +807,17 @@ def plot_perturbation_comparison_3d(
     )
     
     if save_path:
-        fig.write_html(save_path)
+        # Add config to prevent interaction issues
+        config = {
+            'displayModeBar': True,
+            'displaylogo': False,
+            'doubleClick': 'reset',  # Double-click to reset view
+            'scrollZoom': True,
+            'modeBarButtonsToRemove': ['select2d', 'lasso2d']
+        }
+        fig.write_html(save_path, config=config)
         print(f"✅ Plot saved to: {save_path}")
-        print(f"💡 Tip: Click legend items to show/hide cell types in both plots")
+        print(f"💡 Tip: Single-click legend to toggle visibility; double-click plot to reset view")
     
     return fig
 
