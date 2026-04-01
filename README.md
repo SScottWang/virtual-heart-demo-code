@@ -1,6 +1,6 @@
 # 4D Virtual Heart: Proof-of-Concept Demo
 
-This repository contains the source code and analysis pipeline for the **"Towards a 4D Virtual Heart"** proposal.
+This repository contains the source code and analysis pipeline for the virtual-heart-demo.
 
 🔗 **Interactive Demo Website**: [virtual-heart-demo](https://SScottWang.github.io/virtual-heart-demo/)
 
