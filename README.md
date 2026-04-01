@@ -1,4 +1,4 @@
-# 4D Virtual Heart: Proof-of-Concept Demo
+# 4D Virtual Heart
 
 This repository contains the source code and analysis pipeline for the virtual-heart-demo.
 
